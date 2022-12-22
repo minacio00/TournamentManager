@@ -2,7 +2,7 @@ import '../App.css';
 import {Sidebar} from "../compenents/Sidebar"
 import { PageTop } from '../compenents/PageTop';
 
-function App() {
+export function Home() {
   return (
   <div className='bg-slate-900 flex'>
     <main>
@@ -13,4 +13,4 @@ function App() {
   );
 }
 
-export default App;
+
