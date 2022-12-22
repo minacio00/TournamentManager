@@ -5,11 +5,11 @@ export const PageTop = () => {
 
     const navigate =  useNavigate();
     return (
-        <div className="flex flex-col w-screen h-screen py-16 overflow-y-hidden justify-items-start items-center">
+        <div className="flex-col h-[26vh] bg-slate-800 py-16 overflow-hidden justify-items-start items-center border-b border-b-gray-200">
             <header className="text-center">
-                <div className="text-white text-xl flex-col">
+                <div className="text-white text-xl">
                     <h1>Organize your competetions</h1>
-                    <div className="flex p-4">
+                    <div className="p-8">
                         <div className="ml-3 inline-flex rounded-md shadow">
                             <a
                                 href="#"
@@ -37,8 +37,8 @@ export const PageTop = () => {
                     </div>
                 </div>
             </header>
-            <hr className="w-full" />
         </div>
+        
 
     )
 }

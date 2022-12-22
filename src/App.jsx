@@ -7,12 +7,16 @@ import { NewEvent } from './pages/NewEvent';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/newevent' element={<NewEvent />} />
-        <Route path='/' element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <div className='bg-slate-900 flex'>
+        <Sidebar />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/newevent' element={<NewEvent />} />
+          <Route path='/' element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+    
   );
 }
 
