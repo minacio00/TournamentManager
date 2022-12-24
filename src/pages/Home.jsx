@@ -6,7 +6,7 @@ export function Home() {
   return (
   <div className='grow'>
       <PageTop />
-      <h1 className='text-white'>Eventos disponíveis ....</h1>
+      <h1>Eventos disponíveis ....</h1>
   </div>
   );
 }

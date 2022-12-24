@@ -5,7 +5,7 @@ export function Sidebar() {
         p-5 text-xs
         lg:text-sm
         sm:max-w-[12rem]
-        lg:max-w[15rem] border-r border-gray-900
+        lg:max-w[15rem] border-r border-gray-700
         overflow-y-scroll h-screen scrollbar-hide pb-36">
             <div className="space-y-2">
                 <button className="flex items-center space-x-2 hover:text-white ">
