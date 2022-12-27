@@ -10,17 +10,29 @@ export const NewEvent = () => {
     const [EventDate, setEventDate] = useRecoilState(date);
 
     const navigate =  useNavigate();
-    const handleClick = (e) => {
-        e.preventDefault;
-        console.log(EventName, "nome do event");
-        navigate('/bracket');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log({
+        //     "EventName": EventName,
+        //     "NumberOfParticipants": NumberOfParticipants,
+        //     "EventDate": EventDate
+        // });
+
+        fetch('/newevent',{method: "POST", headers: {
+            'Content-Type': 'application/json'} ,
+            body: JSON.stringify({
+                "EventName": EventName,
+                "NumberOfParticipants": NumberOfParticipants,
+                "EventDate": EventDate
+            })
+        })
         // todo: fazer o post para o backend e então salvar no firebase;
         // alert("hello")
     }
     return (
         <div className=" bg-slate-800 min-h-screen min-w-screen text-white
         flex flex-col items-center w-full justify-center" >
-            <form className="mt-8 space-y-6 inline-flex flex-col" method="post" action="/newEvent">
+            <form className="mt-8 space-y-6 inline-flex flex-col" method="post" onSubmitCapture={(e) => handleSubmit(e)} >
                 <div className="space-y-4">
                     <div>
                         <input className=
@@ -36,15 +48,10 @@ export const NewEvent = () => {
                         "appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                         placeholder="Event date" name="date" id="eventDate" type="date" required
                         onChange={(e) => setEventDate(e.target.value)} />
-                        
-                    <button className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white" onClick={
-                        (e) => {
-
-                        }}>
-                        Create
-                    </button>
                 </div>
-                
+                <button type="submit" className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white">
+                    Create
+                </button>
             </form>
         </div>
     )
