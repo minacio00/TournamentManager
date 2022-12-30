@@ -8,16 +8,16 @@ import { BracketView }from './pages/BracketView';
 function App() {
   return (
     <div className='flex'>
-        <Sidebar />
+      <Sidebar />
       <BrowserRouter>
         <Routes>
-        <Route path='/bracket' element={<BracketView />} />
+          <Route path='/bracket' element={<BracketView />} />
           <Route path='/newevent' element={<NewEvent />} />
           <Route path='/' element={<Home />} />
         </Routes>
       </BrowserRouter>
     </div>
-    
+
   );
 }
 
