@@ -1,6 +1,7 @@
 export function Sidebar() {
     return(
         <div className="text-gray-500 bg-slate-900
+        sticky
         hidden md:inline-flex
         p-5 text-xs
         lg:text-sm

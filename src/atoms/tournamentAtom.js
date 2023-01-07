@@ -7,7 +7,7 @@ export const Event = atom({
 
 export const Participants = atom({
     key: "eventParticipants",
-    default: -1
+    default: 4
 });
 export const date = atom({
     key: "eventDate",
