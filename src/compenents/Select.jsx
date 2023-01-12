@@ -2,7 +2,7 @@ import {useState} from 'react'
 import { useSetRecoilState } from 'recoil';
 import {Participants} from '../atoms/tournamentAtom';
 function powersOfTwo(maxTeams) {
-    const maxExponent = Math.log2(maxTeams); // Math.floor()
+    const maxExponent = Math.log2(maxTeams); // ??????????????
     const arr = [];
     for (let i = 2; i <= maxExponent; i++) {
         arr.push(2 ** i);

@@ -1,13 +1,13 @@
 export function Sidebar() {
     return(
         <div className="text-gray-500 bg-slate-900
-        sticky
-        hidden md:inline-flex
-        p-5 text-xs
-        lg:text-sm
+        flex-shrink-0 hidden top-2 flex-grow-1 sticky
+        h-screen
+        p-5 text-xs lg:text-sm
         sm:max-w-[12rem]
+        sm:inline-flex
         lg:max-w[15rem] border-r border-gray-700
-        overflow-y-scroll h-screen scrollbar-hide pb-36">
+        scrollbar-hide pb-36">
             <div className="space-y-2">
                 <button className="flex items-center space-x-2 hover:text-white ">
                     <p>Upcoming event</p>

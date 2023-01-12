@@ -1,7 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Event, Participants, date, tournamentList } from "../atoms/tournamentAtom";
 import { SingleEliminationBracket, Match, SVGViewer } from "@g-loot/react-tournament-brackets";
-import {simpleSmallBracket} from "../sampleData"
 import { useWindowSize } from "../hooks/useWindowSize";
 import {cloneDeep} from "lodash"
 import { useEffect } from "react";
@@ -16,7 +15,14 @@ export const BracketView = () => {
     // console.debug(matches, "partidas");
     // const matchesCopy = _.cloneDeep(matches); // se for feita shallow copy disso daqui o componente que monta a chave quebra
     // todo: persistir o estado
-    if (matches === undefined) {
+    useEffect(() => {
+        console.debug('aqui');
+        if (matches.length == 0){
+            setMatches(JSON.parse(window.localStorage.getItem('newEvent')));
+        }
+    })
+    
+    if (matches.length == 0) {
         return <div className="App">Carregando...</div>;
     }
     return (

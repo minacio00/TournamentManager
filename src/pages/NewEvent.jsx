@@ -26,7 +26,7 @@ export const NewEvent = () => {
             })
         }).then((res) => {
             res.json().then((data) => newTourney.push(...data))
-                .then(() => setMatches(newTourney)) // todo: talvez deixar somente newTourney uma vez que não preciso
+                .then(() => {setMatches(newTourney); localStorage.setItem('newEvent',JSON.stringify(newTourney))}) // todo: talvez deixar somente newTourney uma vez que não preciso
                 .then(() => navigate('/bracket'));                 // salvar multiplos eventos aqui 
         }).catch((e) => console.error(e));
     }
