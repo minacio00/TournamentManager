@@ -16,23 +16,21 @@ export const BracketView = () => {
     // const matchesCopy = _.cloneDeep(matches); // se for feita shallow copy disso daqui o componente que monta a chave quebra
     // todo: persistir o estado
     useEffect(() => {
-        console.debug('aqui');
         if (matches.length == 0){
             setMatches(JSON.parse(window.localStorage.getItem('newEvent')));
         }
     })
     
-    if (matches.length == 0) {
-        return <div className="App">Carregando...</div>;
+    if (matches.length !== 0) {
+        return (
+            <div className=" bg-slate-800 min-h-screen min-w-screen text-white
+            flex flex-col items-center justify-center" >
+                <SingleEliminationBracket
+                    matches={matches}
+                    matchComponent={Match}
+    
+                />
+            </div>
+        )
     }
-    return (
-        <div className=" bg-slate-800 min-h-screen min-w-screen text-white
-        flex flex-col items-center w-full justify-center" >
-            <SingleEliminationBracket
-                matches={matches}
-                matchComponent={Match}
-
-            />
-        </div>
-    )
  }

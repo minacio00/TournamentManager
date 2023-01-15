@@ -26,8 +26,8 @@ export const NewEvent = () => {
             })
         }).then((res) => {
             res.json().then((data) => newTourney.push(...data))
-                .then(() => {setMatches(newTourney); localStorage.setItem('newEvent',JSON.stringify(newTourney))}) // todo: talvez deixar somente newTourney uma vez que não preciso
-                .then(() => navigate('/bracket'));                 // salvar multiplos eventos aqui 
+                .then(() => {setMatches(newTourney); localStorage.setItem('newEvent',JSON.stringify(newTourney))}) 
+                .then(() => navigate('/bracket'));
         }).catch((e) => console.error(e));
     }
    
@@ -43,11 +43,7 @@ export const NewEvent = () => {
                             placeholder="Event name" name="Event" id="event"
                             onChange={(e) => setEvent(e.target.value)} required />
                     </div>
-                    <Select/>
-                    {/* <input className=
-                            "appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                            placeholder="Max n° of participants" name="num" id="num" type="number" min="0" required
-                            onChange={(e) => setParticipants(e.target.value)} /> */}
+                    <Select />
                     <input className=
                         "appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                         placeholder="Event date" name="date" id="eventDate" type="date" required
@@ -56,7 +52,7 @@ export const NewEvent = () => {
                 <button type="submit" className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white">
                     Create
                 </button>
-                
+
             </form>
         </div>
     )
