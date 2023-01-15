@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil"
-import { Event, Participants, date, tournamentList } from "../atoms/tournamentAtom"
+import { Event, Participants, date, tournamentList, allTournaments } from "../atoms/tournamentAtom"
 import { Select } from "../compenents/Select";
 
 export const NewEvent = () => {
@@ -9,6 +9,7 @@ export const NewEvent = () => {
     const [NumberOfParticipants, setParticipants] = useRecoilState(Participants);
     const [EventDate, setEventDate] = useRecoilState(date);
     const [matches, setMatches] = useRecoilState(tournamentList);
+    const [Tournaments,setAlltournaments] = useRecoilState(allTournaments);
     const navigate =  useNavigate();
     const newTourney = [];
     
@@ -26,7 +27,15 @@ export const NewEvent = () => {
             })
         }).then((res) => {
             res.json().then((data) => newTourney.push(...data))
-                .then(() => {setMatches(newTourney); localStorage.setItem('newEvent',JSON.stringify(newTourney))}) 
+                .then(() => { setMatches(newTourney) ; localStorage.setItem('newEvent', JSON.stringify(newTourney)) })
+                .then(() => {
+                    setAlltournaments([...Tournaments, {
+                        'Name': EventName,
+                        'date': EventDate,
+                        'matches': matches,
+                        'participants': NumberOfParticipants
+                    }]);
+                })
                 .then(() => navigate('/bracket'));
         }).catch((e) => console.error(e));
     }

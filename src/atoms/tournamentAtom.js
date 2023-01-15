@@ -14,6 +14,10 @@ export const date = atom({
     default: ""
 });
 export const tournamentList = atom({
+    key: "allMatches",
+    default: []
+});
+export const allTournaments = atom({
     key: "allEvents",
     default: []
 });

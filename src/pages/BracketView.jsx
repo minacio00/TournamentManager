@@ -23,8 +23,8 @@ export const BracketView = () => {
     
     if (matches.length !== 0) {
         return (
-            <div className=" bg-slate-800 min-h-screen min-w-screen text-white
-            flex flex-col items-center justify-center" >
+            <div className=" bg-slate-800 min-h-screen min-w-full text-white
+            flex flex-col justify-center" >
                 <SingleEliminationBracket
                     matches={matches}
                     matchComponent={Match}
