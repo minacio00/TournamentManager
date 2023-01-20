@@ -23,7 +23,7 @@ export const NewEvent = () => {
             body: JSON.stringify({
                 'EventName': EventName,
                 'NumberOfParticipants': NumberOfParticipants,
-                'EventDate': EventDate
+                'EventDate': EventDate,
             })
         }).then((res) => {
             res.json().then((data) => newTourney.push(...data))
@@ -33,10 +33,11 @@ export const NewEvent = () => {
                         'Name': EventName,
                         'date': EventDate,
                         'matches': matches,
-                        'participants': NumberOfParticipants
+                        'participants': parseInt(NumberOfParticipants),
+                        'confirmed': 0
                     }]);
                 })
-                .then(() => navigate('/bracket'));
+                .then(() => navigate(`/event/${EventName}/bracket`));
         }).catch((e) => console.error(e));
     }
    

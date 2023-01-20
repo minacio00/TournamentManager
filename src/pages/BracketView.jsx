@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 export const BracketView = () => {
     const { width, height } = useWindowSize();
-    const [EventName, setEvent] = useRecoilState(Event);
+    // const [EventName, setEvent] = useRecoilState(Event);
     const [matches, setMatches] = useRecoilState(tournamentList);
     // console.log(EventName, "nome do evento");
     // console.debug(matches, "partidas");
