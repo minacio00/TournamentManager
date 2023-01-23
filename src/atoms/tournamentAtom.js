@@ -21,3 +21,7 @@ export const allTournaments = atom({
     key: "allEvents",
     default: []
 });
+export const sportAtom = atom({
+    key: "sport",
+    default: ""
+})

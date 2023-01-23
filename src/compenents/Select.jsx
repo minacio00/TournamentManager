@@ -13,7 +13,7 @@ export const Select = () => {
     const setParticipants = useSetRecoilState(Participants);
     const options = powersOfTwo(128);
     return (
-        <select className='bg-white min-w-full rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm' name="Number of participants" id="attendants"
+        <select className='bg-white min-w-full rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-700 focus:ring-1 focus:border-blue-700 focus:z-10 sm:text-sm' name="Number of participants" id="attendants"
             onChange={(e) => setParticipants(e.target.value)}>
             {options.map((value, index) => {
                 return (

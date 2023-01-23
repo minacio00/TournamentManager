@@ -23,7 +23,7 @@ export const PageTop = () => {
                                 bg-blue-500 px-5 py-3 text-base
                                 font-medium text-white hover:bg-blue-400"
                             >
-                                Novos eventos
+                                New events
                             </Link>
 
                         </div>
@@ -35,7 +35,7 @@ export const PageTop = () => {
                                 border border-transparent
                                 bg-blue-500 px-5 py-3 text-base
                                 font-medium text-white hover:bg-blue-400" >
-                                Encontre eventos 
+                                Find events 
                             </a>
                         </div>
                     </div>
