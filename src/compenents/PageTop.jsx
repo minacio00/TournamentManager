@@ -23,7 +23,7 @@ export const PageTop = () => {
                                 bg-blue-500 px-5 py-3 text-base
                                 font-medium text-white hover:bg-blue-400"
                             >
-                                New events
+                                New event
                             </Link>
 
                         </div>

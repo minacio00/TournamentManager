@@ -31,6 +31,7 @@ export function Home() {
                 key={index}
                 className='flex flex-col m-1
                 rounded-lg border-gray-300 border
+                hover:border-2
                 hover:border-indigo-300'>
                   <img className='max-h-32 rounded-lg'  src='chesspic.jpg' />
                   <b className='text-lg self-center' >{value.Name}</b>
