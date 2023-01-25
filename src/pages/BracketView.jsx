@@ -1,32 +1,35 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import { Event, Participants, date, tournamentList } from "../atoms/tournamentAtom";
+import { Event, Participants, date, tournamentList, allTournaments } from "../atoms/tournamentAtom";
 import { SingleEliminationBracket, Match, SVGViewer } from "@g-loot/react-tournament-brackets";
 import { useWindowSize } from "../hooks/useWindowSize";
 import {cloneDeep} from "lodash"
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 
 
 export const BracketView = () => {
     const { width, height } = useWindowSize();
     // const [EventName, setEvent] = useRecoilState(Event);
-    const [matches, setMatches] = useRecoilState(tournamentList);
-    // console.log(EventName, "nome do evento");
-    // console.debug(matches, "partidas");
-    // const matchesCopy = _.cloneDeep(matches); // se for feita shallow copy disso daqui o componente que monta a chave quebra
-    // todo: persistir o estado
+    const [matches, setMatches] = useRecoilState(tournamentList); // usar o outro estado
+    const currentEventName = useParams().name
+    const tournaments = useRecoilValue(allTournaments);
+    const currentEventIndex =  tournaments.findIndex((value) => value.Name == currentEventName);
+    const tournamentsClone = cloneDeep(tournaments[currentEventIndex]);
+
+    console.log(tournaments)
     useEffect(() => {
-        if (matches.length == 0){
+        if (tournaments[currentEventIndex].matches.length == 0){
             setMatches(JSON.parse(window.localStorage.getItem('newEvent')));
         }
-    })
+    },[])
     
-    if (matches.length !== 0) {
+    if (tournaments[currentEventIndex].matches.length !== 0) {
         return (
             <div className=" bg-slate-800 min-h-screen min-w-full text-white
             flex flex-col justify-center" >
                 <SingleEliminationBracket
-                    matches={matches}
+                    matches={tournamentsClone.matches}
                     matchComponent={Match}
     
                 />

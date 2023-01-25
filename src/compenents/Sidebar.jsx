@@ -20,13 +20,15 @@ export function Sidebar() {
                 </Link>
                 {Tournaments.map((value, index) => {
                     return(
-                        <button key={index} className='hover:text-white break-all '>
-                            <img className='rounded-sm h-10 w-10 my-1 hover:border-2 border-blue-500' src="chesspic.jpg" alt="" />
+                        <Link key={index} to={`event/${value.Name}`} className='hover:text-white break-all '>
+                            <img className='rounded-sm h-10 w-10 my-1 hover:border-2 border-blue-500' src="chesspic.jpg" alt={value.Name} />
                             {/* <p>{value.Name}</p> */}
-                        </button>
+                        </Link>
                     )
                 })}
-                <PlusCircleIcon className='h-8 w-8 space-y-2 text-white'/>
+                <Link to={'newevent'}>
+                    <PlusCircleIcon className='h-8 w-8 space-y-2 text-white' />
+                </Link>
             </div>
         </div>
     );

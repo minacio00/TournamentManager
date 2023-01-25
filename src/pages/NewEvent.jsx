@@ -32,13 +32,13 @@ export const NewEvent = () => {
                 'Sport': sport
             })
         }).then((res) => {
-            res.json().then((data) => newTourney.push(...data))
-                .then(() => { setMatches(newTourney) ; localStorage.setItem('newEvent', JSON.stringify(newTourney)) })
+            res.json().then((data) => {newTourney.push(...data);setMatches(newTourney)})
+                .then(() => { localStorage.setItem('newEvent', JSON.stringify(newTourney)) })
                 .then(() => {
                     setAlltournaments([...Tournaments, {
                         'Name': EventName,
                         'date': EventDate,
-                        'matches': matches,
+                        'matches': newTourney,
                         'participants': parseInt(NumberOfParticipants),
                         'confirmed': 0,
                         'sport': sport

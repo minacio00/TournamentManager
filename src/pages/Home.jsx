@@ -1,13 +1,14 @@
 import '../App.css';
 import { PageTop } from '../compenents/PageTop';
-import {useRecoilValue } from 'recoil';
-import { allTournaments } from '../atoms/tournamentAtom';
+import {useRecoilState, useRecoilValue } from 'recoil';
+import { allTournaments, tournamentList } from '../atoms/tournamentAtom';
 import { CalendarIcon,UsersIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 import dateFortmat from "dateformat";
 
 export function Home() {
-  const Tournaments = useRecoilValue(allTournaments);
+  const [Tournaments,setAlltournaments] = useRecoilState(allTournaments);
+  const matches = useRecoilValue(tournamentList);
   if (Tournaments.length == 0) {
     return(
       <div className='grow'>
@@ -44,7 +45,7 @@ export function Home() {
                   </div>
                   <p className='inline-flex self-center space-x-1 py-1'>
                     <UsersIcon className='self-center w-4 h-4'/>
-                    <span key={index+'i'}>{value.participants}</span>
+                    <span key={index+'i'}>{value.confirmed}/{value.participants}</span>
                   </p>
                 </Link>
               )
