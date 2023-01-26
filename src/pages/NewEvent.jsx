@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil"
 import {
@@ -21,7 +20,7 @@ export const NewEvent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await fetch('https://tournament-manager-api.onrender.com/newevent', {
+        await fetch(process.env.REACT_APP_API_URL+'/newevent', {
             method: "POST", mode: "cors", headers: {
                 'Content-Type': 'application/json'
             },
