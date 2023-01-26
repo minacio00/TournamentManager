@@ -12,7 +12,7 @@ export const PageTop = () => {
         items-center border-b border-b-gray-500">
             <header className="text-center">
                 <div className="text-white text-xl">
-                    <h1>Organize your competetions</h1>
+                    <h1>Organize your competitions </h1>
                     <div className="p-8">
                         <div className="ml-3 inline-flex rounded-md shadow">
                             <Link
