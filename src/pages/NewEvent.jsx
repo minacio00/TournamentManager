@@ -20,7 +20,7 @@ export const NewEvent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await fetch(process.env.REACT_APP_API_URL+'/newevent', {
+        await fetch('https://tournament-manager-api.onrender.com'+'/newevent', {
             method: "POST", mode: "cors", headers: {
                 'Content-Type': 'application/json'
             },
