@@ -17,7 +17,7 @@ export const Register = () => {
         if(allEvents[currentEventIndex].confirmed < allEvents[currentEventIndex].participants){
             let clone = cloneDeep(allEvents);
             
-            await fetch(process.env.REACT_APP_API_URL+`/register/${nickName}`, {
+            await fetch("https://tournament-manager-api.onrender.com"+`/register/${nickName}`, {
                 method: "POST", mode: "cors", headers: {
                     'Content-Type': 'application/json'
                 },
