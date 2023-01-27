@@ -2,16 +2,19 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useRecoilState, useRecoilValue } from "recoil";
 import { allTournaments } from "../atoms/tournamentAtom";
+import { SpinnerDotted } from "spinners-react";
 import { cloneDeep } from "lodash";
 
 export const Register = () => {
     const eventName = useParams().name;
     const [nickName,setNickName] = useState();
     const [allEvents, setAllEvents] = useRecoilState(allTournaments);
+    const [SpinnerHidden, setSpinnerHidden] = useState(true); 
     const navigate = useNavigate();
 
     const handleRegistration = async (e) => {
         e.preventDefault();
+        setSpinnerHidden(!SpinnerHidden);
         const currentEventIndex = allEvents.findIndex((value) => value.Name === eventName);
 
         if(allEvents[currentEventIndex].confirmed < allEvents[currentEventIndex].participants){
@@ -29,6 +32,7 @@ export const Register = () => {
                 clone[currentEventIndex].confirmed++;
                 setAllEvents(clone);
             })).then(() => {
+                setSpinnerHidden(!SpinnerHidden);
                 navigate('/');
             }) // setar estado
             .catch((e) => console.log(e));
@@ -51,12 +55,13 @@ export const Register = () => {
                             onChange={(e) => setNickName(e.target.value)} required />
                     </div>
                 </div>
-                <div className="flex flex-row space-x-2 ">
-                    <button type="submit" className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white">
+                <div className={SpinnerHidden ? "flex space-x-2" : "hidden space-x-2" }>
+                    <button hidden={!SpinnerHidden} type="submit" className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white">
                         Register
                     </button>
                     <Link to={'bracket'} className="h-10 px-6 flex items-center font-semibold rounded-md bg-blue-600 text-white"> View bracket</Link>
                 </div>
+                <SpinnerDotted className='mx-auto' hidden={SpinnerHidden} size={50} thickness={100} speed={120} color="rgba(57, 159, 172, 1)" />
             </form>
         </div>
     )
