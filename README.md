@@ -6,3 +6,7 @@ Estado inicial da aplicação:
 
 Cadastrando novo evento: 
 ![image](https://user-images.githubusercontent.com/43221251/214850226-89dc3aed-7927-4b40-8f13-9aff50788e7b.png)
+
+Após cadastrar um evento: 
+![image](https://user-images.githubusercontent.com/43221251/214993753-acf8a804-1dda-4cf1-9011-d6ad167925ac.png)
+
