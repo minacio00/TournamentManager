@@ -6,6 +6,8 @@ import {
     allTournaments, sportAtom
 } from "../atoms/tournamentAtom"
 import { Select } from "../compenents/Select";
+import { SpinnerDotted } from "spinners-react";
+import { useState } from "react";
 
 export const NewEvent = () => {
     const [EventName, setEvent] = useRecoilState(Event);
@@ -14,12 +16,13 @@ export const NewEvent = () => {
     const [matches, setMatches] = useRecoilState(tournamentList);
     const [sport, setSport] = useRecoilState(sportAtom);
     const [Tournaments,setAlltournaments] = useRecoilState(allTournaments);
+    const [SpinnerHidden, setSpinnerHidden] = useState(true)
     const navigate =  useNavigate();
     const newTourney = [];
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setSpinnerHidden(!SpinnerHidden);
         await fetch('https://tournament-manager-api.onrender.com'+'/newevent', {
             method: "POST", mode: "cors", headers: {
                 'Content-Type': 'application/json'
@@ -43,7 +46,10 @@ export const NewEvent = () => {
                         'sport': sport
                     }]);
                 })
-                .then(() => navigate(`/event/${EventName}/bracket`));
+                .then(() => navigate(`/event/${EventName}/bracket`))
+                .then(() => {
+                    setSpinnerHidden(!SpinnerHidden);
+                });
         }).catch((e) => console.error(e));
     }
    
@@ -51,7 +57,7 @@ export const NewEvent = () => {
     return (
         <div className=" bg-slate-800 min-h-screen min-w-screen text-white
         flex flex-col items-center w-full justify-center" >
-            <form className="mt-8 space-y-6 inline-flex flex-col" method="post" onSubmit={(e) => handleSubmit(e)} >
+            <form className="mt-8 space-y-6 flex flex-col" method="post" onSubmit={(e) => handleSubmit(e)} >
                 <div className="space-y-4">
                     <div>
                         <input className=
@@ -71,10 +77,10 @@ export const NewEvent = () => {
                         placeholder="Event date" name="date" id="eventDate" type="date" required
                         onChange={(e) => setEventDate(e.target.value)} />
                 </div>
-                <button type="submit" className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white  hover:bg-blue-400">
+                <button type="submit" hidden={!SpinnerHidden} className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white  hover:bg-blue-400">
                     Create
                 </button>
-
+                <SpinnerDotted className='mx-auto' hidden={SpinnerHidden} size={50} thickness={100} speed={120} color="rgba(57, 159, 172, 1)" />
             </form>
         </div>
     )
