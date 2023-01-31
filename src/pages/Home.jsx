@@ -14,7 +14,7 @@ export function Home() {
       <div className='grow'>
         <PageTop />
         <main>
-          <div className='flex py-12 px-2 justify-center'>
+          <div className='text-xs sm:text-sm text-center sm:flex py-12 px-2 justify-center'>
             <b>No events at the moment, maybe you should organize one yourself</b>
           </div>
         </main>

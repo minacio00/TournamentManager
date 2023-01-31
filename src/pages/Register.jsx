@@ -56,10 +56,10 @@ export const Register = () => {
                     </div>
                 </div>
                 <div className={SpinnerHidden ? "flex space-x-2" : "hidden space-x-2" }>
-                    <button hidden={!SpinnerHidden} type="submit" className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white">
+                    <button hidden={!SpinnerHidden} type="submit" className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white">
                         Register
                     </button>
-                    <Link to={'bracket'} className="h-10 px-6 flex items-center font-semibold rounded-md bg-blue-600 text-white"> View bracket</Link>
+                    <Link to={'bracket'} className="h-10 px-6 flex items-center font-semibold rounded-md bg-blue-500 text-white"> View bracket</Link>
                 </div>
                 <SpinnerDotted className='mx-auto' hidden={SpinnerHidden} size={50} thickness={100} speed={120} color="rgba(57, 159, 172, 1)" />
             </form>

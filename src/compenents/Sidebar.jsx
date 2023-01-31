@@ -7,7 +7,7 @@ export function Sidebar() {
     const Tournaments = useRecoilValue(allTournaments);
     return(
         <div className="text-gray-500 bg-slate-900
-        flex-shrink-0 hidden top-2 flex-grow-1
+        flex-shrink-0 w-12 top-2 flex-grow-1
         min-h-screen
         p-5 text-xs lg:text-sm
         sm:w-20

@@ -77,7 +77,7 @@ export const NewEvent = () => {
                         placeholder="Event date" name="date" id="eventDate" type="date" required
                         onChange={(e) => setEventDate(e.target.value)} />
                 </div>
-                <button type="submit" hidden={!SpinnerHidden} className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white  hover:bg-blue-400">
+                <button type="submit" hidden={!SpinnerHidden} className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white  hover:bg-blue-400">
                     Create
                 </button>
                 <SpinnerDotted className='mx-auto' hidden={SpinnerHidden} size={50} thickness={100} speed={120} color="rgba(57, 159, 172, 1)" />
