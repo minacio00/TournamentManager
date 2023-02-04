@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { allTournaments } from '../atoms/tournamentAtom';
 import { PlusCircleIcon } from '@heroicons/react/24/solid';
+import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { getAuth, signOut } from 'firebase/auth';
+import { firebaseApp } from '../firebaseConfig';
+
 export function Sidebar() {
     const Tournaments = useRecoilValue(allTournaments);
     return(
@@ -18,6 +22,10 @@ export function Sidebar() {
                 <Link className="hover:text-white " to={'/'}>
                     <HomeIcon className='h-8 w-8 mb-4 text-white'/>
                 </Link>
+
+                <div onClick={() =>{ signOut(getAuth(firebaseApp)); console.log("amado")}} className="hover:text-white " to={'/'}>
+                    <HomeIcon className='h-8 w-8 mb-4 text-green-600 hover:cursor-pointer'/>
+                </div>
                 {Tournaments.map((value, index) => {
                     return(
                         <Link key={index} to={`event/${value.Name}`} className='hover:text-white break-all '>
@@ -28,6 +36,9 @@ export function Sidebar() {
                 })}
                 <Link to={'newevent'}>
                     <PlusCircleIcon className='h-8 w-8 space-y-2 text-white' />
+                </Link>
+                <Link className='fixed bottom-8' to={'login'}>
+                    <UserCircleIcon className='h-8 w-8 space-y-2 text-white' />
                 </Link>
             </div>
         </div>
