@@ -4,11 +4,23 @@ import { useRecoilValue } from 'recoil';
 import { allTournaments } from '../atoms/tournamentAtom';
 import { PlusCircleIcon } from '@heroicons/react/24/solid';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { UserMinusIcon } from '@heroicons/react/24/solid';
 import { getAuth, signOut } from 'firebase/auth';
 import { firebaseApp } from '../firebaseConfig';
+import { useState } from 'react';
 
 export function Sidebar() {
     const Tournaments = useRecoilValue(allTournaments);
+    const [Islogged, setIslogged] = useState(getAuth().currentUser !== null);
+
+    const unsubscribe = getAuth().onAuthStateChanged((user) => {
+        if (user) {
+            setIslogged(!Islogged);
+            
+        }
+    });
+    
+
     return(
         <div className="text-gray-500 bg-slate-900
         flex-shrink-0 w-12 top-2 flex-grow-1
@@ -23,9 +35,6 @@ export function Sidebar() {
                     <HomeIcon className='h-8 w-8 mb-4 text-white'/>
                 </Link>
 
-                <div onClick={() =>{ signOut(getAuth(firebaseApp)); console.log("amado")}} className="hover:text-white " to={'/'}>
-                    <HomeIcon className='h-8 w-8 mb-4 text-green-600 hover:cursor-pointer'/>
-                </div>
                 {Tournaments.map((value, index) => {
                     return(
                         <Link key={index} to={`event/${value.Name}`} className='hover:text-white break-all '>
@@ -37,9 +46,19 @@ export function Sidebar() {
                 <Link to={'newevent'}>
                     <PlusCircleIcon className='h-8 w-8 space-y-2 text-white' />
                 </Link>
-                <Link className='fixed bottom-8' to={'login'}>
+                {!getAuth().currentUser &&
+                 <Link className='fixed bottom-8' to={'login'}>
                     <UserCircleIcon className='h-8 w-8 space-y-2 text-white' />
-                </Link>
+                </Link>}
+
+                {getAuth().currentUser &&
+                 <div onClick={() =>{ signOut(getAuth(firebaseApp))}}
+                 className="hover:text-white h-8 w-8 space-y-2 fixed bottom-8 " to={'/'}>
+                    <UserMinusIcon className='text-red-500 hover:cursor-pointer'/>
+                </div> }
+                {/* <div onClick={() =>{ signOut(getAuth(firebaseApp)); console.log("amado")}} className="hover:text-white " to={'/'}>
+                    <UserMinusIcon className='h-8 w-8 mb-4 text-red-500 hover:cursor-pointer'/>
+                </div> */}
             </div>
         </div>
     );

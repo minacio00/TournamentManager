@@ -1,13 +1,21 @@
 import './App.css';
+import { useEffect } from 'react';
 import {Sidebar} from "./compenents/Sidebar"
 import { Route, Routes,BrowserRouter } from 'react-router-dom';
-import {Home} from './pages/Home';
+import { User } from "./atoms/userAtom";
+import { Home } from './pages/Home';
 import { NewEvent } from './pages/NewEvent';
 import { BracketView }from './pages/BracketView';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
+import { getAuth } from 'firebase/auth';
+import { useSetRecoilState } from 'recoil';
 
 function App() {
+  const auth = getAuth();
+  const setUser = useSetRecoilState(User);
+
+
   return (
     <div className='flex'>
       <BrowserRouter>

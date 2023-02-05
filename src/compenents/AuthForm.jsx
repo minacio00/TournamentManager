@@ -29,7 +29,7 @@ export const AuthForm = ({register}) => {
         .then((result) => {
             if (!(result instanceof Error)) {
                 navigate('/')
-                console.log(result, "teste");
+                // console.log(result.user, "teste");
             }
         })
         .catch((e) => {

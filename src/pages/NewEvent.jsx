@@ -7,7 +7,8 @@ import {
 } from "../atoms/tournamentAtom"
 import { Select } from "../compenents/Select";
 import { SpinnerDotted } from "spinners-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
 
 export const NewEvent = () => {
     const [EventName, setEvent] = useRecoilState(Event);
@@ -20,6 +21,13 @@ export const NewEvent = () => {
     const navigate =  useNavigate();
     const newTourney = [];
     
+    useEffect(() => {
+        if (!(getAuth().currentUser)) {
+            navigate('/login');
+            // console.log(getAuth().currentUser);
+        }
+    }, [])
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSpinnerHidden(!SpinnerHidden);
@@ -31,7 +39,8 @@ export const NewEvent = () => {
                 'EventName': EventName,
                 'NumberOfParticipants': NumberOfParticipants,
                 'EventDate': EventDate,
-                'Sport': sport
+                'Sport': sport,
+                'createdBy': getAuth().currentUser.uid
             })
         }).then((res) => {
             res.json().then((data) => {newTourney.push(...data);setMatches(newTourney)})
