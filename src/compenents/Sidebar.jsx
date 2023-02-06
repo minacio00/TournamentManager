@@ -1,26 +1,29 @@
 import {HomeIcon} from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { allTournaments } from '../atoms/tournamentAtom';
+import { islogged } from '../atoms/userAtom';
 import { PlusCircleIcon } from '@heroicons/react/24/solid';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { UserMinusIcon } from '@heroicons/react/24/solid';
 import { getAuth, signOut } from 'firebase/auth';
 import { firebaseApp } from '../firebaseConfig';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function Sidebar() {
     const Tournaments = useRecoilValue(allTournaments);
-    const [Islogged, setIslogged] = useState(getAuth().currentUser !== null);
-
-    const unsubscribe = getAuth().onAuthStateChanged((user) => {
-        if (user) {
-            setIslogged(!Islogged);
-            
-        }
-    });
-    
-
+    const [Islogged, setIslogged] = useRecoilState(islogged);
+    // const unsubscribe = getAuth().onAuthStateChanged((user) => {
+    //     if (getAuth().currentUser !== null) {
+    //         setIslogged(!Islogged);
+           
+    //     }
+    // });
+    // // unsubscribe();
+    // useEffect(() => {
+    //     setIslogged(getAuth().currentUser !== null);    
+    // });
+    console.log(Islogged)
     return(
         <div className="text-gray-500 bg-slate-900
         flex-shrink-0 w-12 top-2 flex-grow-1
@@ -36,9 +39,10 @@ export function Sidebar() {
                 </Link>
 
                 {Tournaments.map((value, index) => {
+                    
                     return(
-                        <Link key={index} to={`event/${value.Name}`} className='hover:text-white break-all '>
-                            <img className='rounded-sm h-10 w-10 my-1 hover:border-2 border-blue-500' src="chesspic.jpg" alt={value.Name} />
+                        <Link key={index} to={`event/${value.eventName}`} className='hover:text-white break-all '>
+                            <img className='rounded-sm h-10 w-10 my-1 hover:border-2 border-blue-500' src="/chesspic.jpg" alt={value.Name} />
                             {/* <p>{value.Name}</p> */}
                         </Link>
                     )
@@ -46,16 +50,19 @@ export function Sidebar() {
                 <Link to={'newevent'}>
                     <PlusCircleIcon className='h-8 w-8 space-y-2 text-white' />
                 </Link>
-                {!getAuth().currentUser &&
-                 <Link className='fixed bottom-8' to={'login'}>
+                
+                 <Link hidden={Islogged} className='fixed bottom-8' to={'login'}>
                     <UserCircleIcon className='h-8 w-8 space-y-2 text-white' />
-                </Link>}
+                </Link>
 
-                {getAuth().currentUser &&
-                 <div onClick={() =>{ signOut(getAuth(firebaseApp))}}
+                <div hidden={!Islogged} onClick={() => {
+                    signOut(getAuth(firebaseApp));
+                    setIslogged(() => !Islogged);
+                    }
+                 }
                  className="hover:text-white h-8 w-8 space-y-2 fixed bottom-8 " to={'/'}>
                     <UserMinusIcon className='text-red-500 hover:cursor-pointer'/>
-                </div> }
+                </div>
                 {/* <div onClick={() =>{ signOut(getAuth(firebaseApp)); console.log("amado")}} className="hover:text-white " to={'/'}>
                     <UserMinusIcon className='h-8 w-8 mb-4 text-red-500 hover:cursor-pointer'/>
                 </div> */}

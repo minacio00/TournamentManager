@@ -2,11 +2,14 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, on
 import { useEffect, useState } from "react";
 import { firebaseApp } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
+import { islogged } from "../atoms/userAtom";
+import { useSetRecoilState } from "recoil";
 
 export const AuthForm = ({register}) => {
     const [email, setemail] = useState();
     const [password, setpassword] = useState();
     const [hiddenLabel, sethiddenLabel] = useState(true);
+    const setLogged = useSetRecoilState(islogged);
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -28,6 +31,7 @@ export const AuthForm = ({register}) => {
         await signInWithEmailAndPassword(auth, email, password)
         .then((result) => {
             if (!(result instanceof Error)) {
+                setLogged(true);
                 navigate('/')
                 // console.log(result.user, "teste");
             }
@@ -51,6 +55,7 @@ export const AuthForm = ({register}) => {
         await createUserWithEmailAndPassword(auth,email,password)
         .then((result) => {
             if (!(result instanceof Error)) {
+                setLogged(true);
                 navigate('/')
                 console.log(result, "teste");
             }
@@ -72,7 +77,7 @@ export const AuthForm = ({register}) => {
     
     if (!register) {
         return (
-            <div className="mt-8 space-y-6" onSubmit={(e) => e.preventDefault()} >
+            <div className="mt-4 space-y-6" onSubmit={(e) => e.preventDefault()} >
                 <form className=" flex flex-col space-y-4">
                     <input className=
                         "appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-700 focus:ring-1 focus:border-blue-700 focus:z-10 sm:text-sm"

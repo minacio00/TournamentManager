@@ -27,11 +27,10 @@ export const NewEvent = () => {
             // console.log(getAuth().currentUser);
         }
     }, [])
-    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSpinnerHidden(!SpinnerHidden);
-        await fetch('https://tournament-manager-api.onrender.com'+'/newevent', {
+        await fetch('http://localhost:3000'+'/newevent', {
             method: "POST", mode: "cors", headers: {
                 'Content-Type': 'application/json'
             },
@@ -40,6 +39,7 @@ export const NewEvent = () => {
                 'NumberOfParticipants': NumberOfParticipants,
                 'EventDate': EventDate,
                 'Sport': sport,
+                'confirmed': 0,
                 'createdBy': getAuth().currentUser.uid
             })
         }).then((res) => {
@@ -50,7 +50,7 @@ export const NewEvent = () => {
                         'Name': EventName,
                         'date': EventDate,
                         'matches': newTourney,
-                        'participants': parseInt(NumberOfParticipants),
+                        'NumberOfParticipants': parseInt(NumberOfParticipants),
                         'confirmed': 0,
                         'sport': sport
                     }]);

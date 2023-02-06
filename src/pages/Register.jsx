@@ -15,12 +15,12 @@ export const Register = () => {
     const handleRegistration = async (e) => {
         e.preventDefault();
         setSpinnerHidden(!SpinnerHidden);
-        const currentEventIndex = allEvents.findIndex((value) => value.Name === eventName);
+        const currentEventIndex = allEvents.findIndex((value) => value.eventName === eventName);
 
-        if(allEvents[currentEventIndex].confirmed < allEvents[currentEventIndex].participants){
+        if(allEvents[currentEventIndex].confirmed < allEvents[currentEventIndex].NumberOfParticipants){
             let clone = cloneDeep(allEvents);
             
-            await fetch('https://tournament-manager-api.onrender.com'+`/register/${nickName}`, {
+            await fetch('http://localhost:3000'+`/register/${nickName}`, {
                 method: "POST", mode: "cors", headers: {
                     'Content-Type': 'application/json'
                 },
@@ -29,11 +29,11 @@ export const Register = () => {
                 })
             }).then((res) => res.json().then((data) => {
                 clone[currentEventIndex] = data.currentEvent;
-                clone[currentEventIndex].confirmed++;
+                // clone[currentEventIndex].confirmed++; // colocar a responsabilidade de incrementar no backend
                 setAllEvents(clone);
             })).then(() => {
                 setSpinnerHidden(!SpinnerHidden);
-                navigate('/');
+                // navigate('/');
             }) // setar estado
             .catch((e) => console.log(e));
         }
