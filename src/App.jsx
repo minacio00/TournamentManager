@@ -2,24 +2,27 @@ import './App.css';
 import { useEffect } from 'react';
 import {Sidebar} from "./compenents/Sidebar"
 import { Route, Routes,BrowserRouter } from 'react-router-dom';
-import { User } from "./atoms/userAtom";
+import { islogged, User } from "./atoms/userAtom";
 import { Home } from './pages/Home';
 import { NewEvent } from './pages/NewEvent';
 import { BracketView }from './pages/BracketView';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { getAuth } from 'firebase/auth';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { allTournaments } from './atoms/tournamentAtom';
 
 function App() {
-  const auth = getAuth();
-  const setUser = useSetRecoilState(User);
-
+  // const auth = getAuth();
+  // const setUser = useSetRecoilState(User);
+  const [Tournaments, setAlltournaments] = useRecoilState(allTournaments);
+  const IsLogged = useRecoilValue(islogged);
+  // fazer com que app busque o estado de autenticação num useeffect e setar sempre que islogged for diferente do auth.currentUser
 
   return (
     <div className='flex'>
       <BrowserRouter>
-        <Sidebar />
+        <Sidebar logged={IsLogged}/>
         <Routes>
           <Route path='/' index element={<Home />} />
           <Route path='/login' element={<Login />} />

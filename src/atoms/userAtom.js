@@ -1,10 +1,11 @@
-import { atom } from "recoil";
+import { getAuth } from "firebase/auth";
+import { atom, selector } from "recoil";
 
 export const User = atom({
     key: "user",
     default: {}
 })
 export const islogged = atom({
-    key: "loggedUser",
+    key: "islogged",
     default: false
 })

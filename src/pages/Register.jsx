@@ -30,10 +30,10 @@ export const Register = () => {
             }).then((res) => res.json().then((data) => {
                 clone[currentEventIndex] = data.currentEvent;
                 // clone[currentEventIndex].confirmed++; // colocar a responsabilidade de incrementar no backend
-                setAllEvents(clone);
+                 setAllEvents(clone);
             })).then(() => {
                 setSpinnerHidden(!SpinnerHidden);
-                // navigate('/');
+                navigate('/');
             }) // setar estado
             .catch((e) => console.log(e));
         }

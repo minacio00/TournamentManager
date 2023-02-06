@@ -14,10 +14,11 @@ export const BracketView = () => {
     const [matches, setMatches] = useRecoilState(tournamentList); // usar o outro estado
     const currentEventName = useParams().name
     const tournaments = useRecoilValue(allTournaments);
+    console.log(tournaments)
+    debugger
     const currentEventIndex =  tournaments.findIndex((value) => value.eventName == currentEventName);
     const tournamentsClone = cloneDeep(tournaments[currentEventIndex]);
 
-    console.log(tournaments)
     useEffect(() => {
         if (tournaments[currentEventIndex].matches.length == 0){
             setMatches(JSON.parse(window.localStorage.getItem('newEvent')));

@@ -47,7 +47,7 @@ export const NewEvent = () => {
                 .then(() => { localStorage.setItem('newEvent', JSON.stringify(newTourney)) })
                 .then(() => {
                     setAlltournaments([...Tournaments, {
-                        'Name': EventName,
+                        'eventName': EventName,
                         'date': EventDate,
                         'matches': newTourney,
                         'NumberOfParticipants': parseInt(NumberOfParticipants),

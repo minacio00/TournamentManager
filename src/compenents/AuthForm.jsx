@@ -9,7 +9,7 @@ export const AuthForm = ({register}) => {
     const [email, setemail] = useState();
     const [password, setpassword] = useState();
     const [hiddenLabel, sethiddenLabel] = useState(true);
-    const setLogged = useSetRecoilState(islogged);
+    const setIslogged = useSetRecoilState(islogged);
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -17,10 +17,11 @@ export const AuthForm = ({register}) => {
         auth.onAuthStateChanged((currentUser) => {
             if(currentUser){
                 navigate('/');
+                setIslogged(true);
             }
         });
        
-    },[]);
+    });
 
     const handleClick = async () => {
         const auth = getAuth(firebaseApp);
@@ -31,7 +32,7 @@ export const AuthForm = ({register}) => {
         await signInWithEmailAndPassword(auth, email, password)
         .then((result) => {
             if (!(result instanceof Error)) {
-                setLogged(true);
+                setIslogged(true);
                 navigate('/')
                 // console.log(result.user, "teste");
             }
