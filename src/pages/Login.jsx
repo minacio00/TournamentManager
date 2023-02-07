@@ -6,7 +6,7 @@ export const Login = () => {
     const [register, setRegister] = useState(false);
    
     return(
-        <div className=" bg-slate-800 min-h-screen min-w-screen text-white
+        <div className=" bg-slate-800 ml-[80px] min-h-screen min-w-screen text-white
         flex items-center w-full justify-center" >
             <span className="flex flex-col">
                 <h2 className="mx-auto font-bold">

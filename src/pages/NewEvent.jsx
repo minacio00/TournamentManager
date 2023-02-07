@@ -43,8 +43,7 @@ export const NewEvent = () => {
                 'createdBy': getAuth().currentUser.uid
             })
         }).then((res) => {
-            res.json().then((data) => {newTourney.push(...data);setMatches(newTourney)})
-                .then(() => { localStorage.setItem('newEvent', JSON.stringify(newTourney)) })
+            res.json().then((data) => { newTourney.push(...data); setMatches(newTourney) })
                 .then(() => {
                     setAlltournaments([...Tournaments, {
                         'eventName': EventName,
@@ -52,9 +51,10 @@ export const NewEvent = () => {
                         'matches': newTourney,
                         'NumberOfParticipants': parseInt(NumberOfParticipants),
                         'confirmed': 0,
-                        'sport': sport
+                        'Sport': sport
                     }]);
                 })
+                .then(() => { localStorage.setItem('allEvents', JSON.stringify(Tournaments))})
                 .then(() => navigate(`/event/${EventName}/bracket`))
                 .then(() => {
                     setSpinnerHidden(!SpinnerHidden);
@@ -65,7 +65,7 @@ export const NewEvent = () => {
     
     return (
         <div className=" bg-slate-800 min-h-screen min-w-screen text-white
-        flex flex-col items-center w-full justify-center" >
+        flex flex-col items-center ml-[80px] w-full justify-center" >
             <form className="mt-8 space-y-6 flex flex-col" method="post" onSubmit={(e) => handleSubmit(e)} >
                 <div className="space-y-4">
                     <div>

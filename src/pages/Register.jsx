@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { useRecoilState, useRecoilValue } from "recoil";
 import { allTournaments } from "../atoms/tournamentAtom";
 import { SpinnerDotted } from "spinners-react";
-import { cloneDeep } from "lodash";
+import _ from "lodash";
 
 export const Register = () => {
     const eventName = useParams().name;
@@ -18,8 +18,7 @@ export const Register = () => {
         const currentEventIndex = allEvents.findIndex((value) => value.eventName === eventName);
 
         if(allEvents[currentEventIndex].confirmed < allEvents[currentEventIndex].NumberOfParticipants){
-            let clone = cloneDeep(allEvents);
-            
+            let clone = _.clone(allEvents);
             await fetch('http://localhost:3000'+`/register/${nickName}`, {
                 method: "POST", mode: "cors", headers: {
                     'Content-Type': 'application/json'
@@ -28,8 +27,9 @@ export const Register = () => {
                     'currentEvent': allEvents[currentEventIndex]
                 })
             }).then((res) => res.json().then((data) => {
-                clone[currentEventIndex] = data.currentEvent;
+                clone[currentEventIndex] = data;
                 // clone[currentEventIndex].confirmed++; // colocar a responsabilidade de incrementar no backend
+                localStorage.setItem('allEvents',JSON.stringify(clone));
                  setAllEvents(clone);
             })).then(() => {
                 setSpinnerHidden(!SpinnerHidden);
@@ -44,7 +44,7 @@ export const Register = () => {
 
     return (
         <div className=" bg-slate-800 min-h-screen min-w-screen text-white
-        flex flex-col items-center w-full justify-center" >
+        flex flex-col items-center ml-[80px]  w-full justify-center" >
             <header>Register for {eventName} </header>
             <form className="mt-8 space-y-6 inline-flex flex-col" method="post" onSubmit={(e) => handleRegistration(e)} >
                 <div className="space-y-4">

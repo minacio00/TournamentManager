@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import dateFortmat from "dateformat";
 import { useEffect } from 'react';
 
-export function Home() {
+export function Home({allEvents}) {
   const [Tournaments,setAlltournaments] = useRecoilState(allTournaments);
   const matches = useRecoilValue(tournamentList);
 
@@ -20,6 +20,7 @@ export function Home() {
     .then((res) => {
       res.json().then((data) => {
         setAlltournaments(data);
+        console.log("reading db")
         localStorage.setItem('allEvents',JSON.stringify(data));
       });
       // setAlltournaments(res.json());
@@ -28,10 +29,17 @@ export function Home() {
   }
 
   useEffect(() => {
-    getAllEvents();
+    // if (Tournaments.length === 0) {
+    if (allEvents.length === 0) {
+      getAllEvents();
+    }
+    else{
+      // setAlltournaments(JSON.parse(localStorage.getItem('allEvents')) );
+    }
+    
   },[]);
 
-  if (Tournaments.length == 0) {
+  if (allEvents.length == 0) {
     return(
       <div className='grow'>
         <PageTop />
@@ -44,11 +52,11 @@ export function Home() {
     )
   }
   return (
-  <div className='grow'>
+  <div className='grow ml-[80px]'>
       <PageTop />
       <main>
         <div className='flex py-12 mx-6 justify-self-center flex-wrap'>
-          {Tournaments.map((value, index) => {
+          {allEvents?.map((value, index) => {
               return (
                 <Link to={`/event/${value?.eventName}`}
                 key={index}

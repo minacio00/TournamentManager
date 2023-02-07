@@ -1,5 +1,6 @@
 import { getAuth } from "firebase/auth";
 import { atom, selector } from "recoil";
+import { firebaseApp } from "../firebaseConfig";
 
 export const User = atom({
     key: "user",
@@ -7,5 +8,5 @@ export const User = atom({
 })
 export const islogged = atom({
     key: "islogged",
-    default: false
+    default: getAuth(firebaseApp).currentUser != null
 })

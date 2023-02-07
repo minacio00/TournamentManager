@@ -22,9 +22,9 @@ function App() {
   return (
     <div className='flex'>
       <BrowserRouter>
-        <Sidebar logged={IsLogged}/>
+        <Sidebar logged={IsLogged} allEvents={Tournaments} />
         <Routes>
-          <Route path='/' index element={<Home />} />
+          <Route path='/' index element={<Home allEvents={Tournaments} />} />
           <Route path='/login' element={<Login />} />
           <Route path='/event/:name' element={<Register />} />
           <Route path='/event/:name/bracket' element={<BracketView />} />

@@ -15,7 +15,7 @@ export const AuthForm = ({register}) => {
 
     useEffect(() => {
         auth.onAuthStateChanged((currentUser) => {
-            if(currentUser){
+            if(currentUser!== null){
                 navigate('/');
                 setIslogged(true);
             }
@@ -56,7 +56,7 @@ export const AuthForm = ({register}) => {
         await createUserWithEmailAndPassword(auth,email,password)
         .then((result) => {
             if (!(result instanceof Error)) {
-                setLogged(true);
+                setIslogged(true);
                 navigate('/')
                 console.log(result, "teste");
             }

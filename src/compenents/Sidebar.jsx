@@ -10,14 +10,21 @@ import { getAuth, signOut } from 'firebase/auth';
 import { firebaseApp } from '../firebaseConfig';
 import { useEffect, useState } from 'react';
 
-export function Sidebar({logged}) {
+export function Sidebar({logged, allEvents}) {
     const Tournaments = useRecoilValue(allTournaments);
     const setIslogged = useSetRecoilState(islogged);
-    
+
+    useEffect(() => {
+        console.log(logged)
+        return (
+            setIslogged(getAuth().currentUser!=null)
+        )
+    },[Tournaments])
     return(
         <div className="text-gray-500 bg-slate-900
-        flex-shrink-0 w-12 top-2 flex-grow-1
+        flex-shrink-0 w-20 flex-grow-1
         min-h-screen
+        fixed
         p-5 text-xs lg:text-sm
         sm:w-20
         sm:flex
@@ -28,7 +35,7 @@ export function Sidebar({logged}) {
                     <HomeIcon className='h-8 w-8 mb-4 text-white'/>
                 </Link>
 
-                {Tournaments.length!=0 && Tournaments.map((value, index) => {
+                {allEvents.length!=0 && allEvents.map((value, index) => {
                     
                     return(
                         <Link key={index} to={`event/${value?.eventName}`} className='hover:text-white break-all '>
@@ -41,12 +48,12 @@ export function Sidebar({logged}) {
                     <PlusCircleIcon className='h-8 w-8 space-y-2 text-white' />
                 </Link>
                 
-                 <Link hidden={logged} className='fixed bottom-8' to={'login'}>
+                 <Link hidden={logged} className='fixed bottom-2' to={'login'}>
                     <UserCircleIcon className='h-8 w-8 space-y-2 text-white' />
                 </Link>
                 <div hidden={!logged} onClick={() => {
-                    signOut(getAuth(firebaseApp));
-                    setIslogged((currval)=> !logged);
+                    signOut(getAuth(firebaseApp)).
+                    then(setIslogged((currval)=> !logged))
                     console.log(logged);
                     }
                  }
