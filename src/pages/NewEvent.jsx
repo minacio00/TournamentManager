@@ -30,7 +30,7 @@ export const NewEvent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSpinnerHidden(!SpinnerHidden);
-        await fetch('https://tournament-manager.onrender.com'+'/newevent', {
+        await fetch('https://tournament-manager-api.onrender.com'+'/newevent', {
             method: "POST", mode: "cors", headers: {
                 'Content-Type': 'application/json'
             },

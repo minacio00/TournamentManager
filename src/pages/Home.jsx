@@ -12,7 +12,7 @@ export function Home({allEvents}) {
   const matches = useRecoilValue(tournamentList);
 
   const getAllEvents = async () => {
-    await fetch('https://tournament-manager.onrender.com' + '/tournaments/view', {
+    await fetch('https://tournament-manager-api.onrender.com' + '/tournaments/view', {
       method: "GET", mode: "cors", headers: {
         'Content-Type': 'application/json'
       }
