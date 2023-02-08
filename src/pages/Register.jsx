@@ -19,7 +19,7 @@ export const Register = () => {
 
         if(allEvents[currentEventIndex].confirmed < allEvents[currentEventIndex].NumberOfParticipants){
             let clone = _.clone(allEvents);
-            await fetch('http://localhost:3000'+`/register/${nickName}`, {
+            await fetch('https://tournament-manager.onrender.com'+`/register/${nickName}`, {
                 method: "POST", mode: "cors", headers: {
                     'Content-Type': 'application/json'
                 },
