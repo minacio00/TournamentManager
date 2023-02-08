@@ -14,10 +14,11 @@ export const BracketView = () => {
     const [matches, setMatches] = useRecoilState(tournamentList); // usar o outro estado
     const currentEventName = useParams().name
     const tournaments = useRecoilValue(allTournaments);
-    const currentEventIndex =  tournaments.findIndex((value) => value.Name == currentEventName);
+    console.log(tournaments)
+    
+    const currentEventIndex =  tournaments.findIndex((value) => value.eventName == currentEventName);
     const tournamentsClone = cloneDeep(tournaments[currentEventIndex]);
 
-    console.log(tournaments)
     useEffect(() => {
         if (tournaments[currentEventIndex].matches.length == 0){
             setMatches(JSON.parse(window.localStorage.getItem('newEvent')));
@@ -26,12 +27,12 @@ export const BracketView = () => {
     
     if (tournaments[currentEventIndex].matches.length !== 0) {
         return (
-            <div className=" bg-slate-800 min-h-screen min-w-full text-white
+            <div className=" bg-slate-800 min-h-screen ml-[80px] min-w-fit   text-white
             flex flex-col justify-center" >
                 <SingleEliminationBracket
                     matches={tournamentsClone.matches}
                     matchComponent={Match}
-    
+                    
                 />
             </div>
         )

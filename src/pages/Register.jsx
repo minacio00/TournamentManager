@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { useRecoilState, useRecoilValue } from "recoil";
 import { allTournaments } from "../atoms/tournamentAtom";
 import { SpinnerDotted } from "spinners-react";
-import { cloneDeep } from "lodash";
+import _ from "lodash";
 
 export const Register = () => {
     const eventName = useParams().name;
@@ -15,12 +15,11 @@ export const Register = () => {
     const handleRegistration = async (e) => {
         e.preventDefault();
         setSpinnerHidden(!SpinnerHidden);
-        const currentEventIndex = allEvents.findIndex((value) => value.Name === eventName);
+        const currentEventIndex = allEvents.findIndex((value) => value.eventName === eventName);
 
-        if(allEvents[currentEventIndex].confirmed < allEvents[currentEventIndex].participants){
-            let clone = cloneDeep(allEvents);
-            
-            await fetch('https://tournament-manager-api.onrender.com'+`/register/${nickName}`, {
+        if(allEvents[currentEventIndex].confirmed < allEvents[currentEventIndex].NumberOfParticipants){
+            let clone = _.clone(allEvents);
+            await fetch('http://localhost:3000'+`/register/${nickName}`, {
                 method: "POST", mode: "cors", headers: {
                     'Content-Type': 'application/json'
                 },
@@ -28,9 +27,10 @@ export const Register = () => {
                     'currentEvent': allEvents[currentEventIndex]
                 })
             }).then((res) => res.json().then((data) => {
-                clone[currentEventIndex] = data.currentEvent;
-                clone[currentEventIndex].confirmed++;
-                setAllEvents(clone);
+                clone[currentEventIndex] = data;
+                // clone[currentEventIndex].confirmed++; // colocar a responsabilidade de incrementar no backend
+                localStorage.setItem('allEvents',JSON.stringify(clone));
+                 setAllEvents(clone);
             })).then(() => {
                 setSpinnerHidden(!SpinnerHidden);
                 navigate('/');
@@ -44,7 +44,7 @@ export const Register = () => {
 
     return (
         <div className=" bg-slate-800 min-h-screen min-w-screen text-white
-        flex flex-col items-center w-full justify-center" >
+        flex flex-col items-center ml-[80px]  w-full justify-center" >
             <header>Register for {eventName} </header>
             <form className="mt-8 space-y-6 inline-flex flex-col" method="post" onSubmit={(e) => handleRegistration(e)} >
                 <div className="space-y-4">
@@ -56,10 +56,10 @@ export const Register = () => {
                     </div>
                 </div>
                 <div className={SpinnerHidden ? "flex space-x-2" : "hidden space-x-2" }>
-                    <button hidden={!SpinnerHidden} type="submit" className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white">
+                    <button hidden={!SpinnerHidden} type="submit" className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white">
                         Register
                     </button>
-                    <Link to={'bracket'} className="h-10 px-6 flex items-center font-semibold rounded-md bg-blue-600 text-white"> View bracket</Link>
+                    <Link to={'bracket'} className="h-10 px-6 flex items-center font-semibold rounded-md bg-blue-500 text-white"> View bracket</Link>
                 </div>
                 <SpinnerDotted className='mx-auto' hidden={SpinnerHidden} size={50} thickness={100} speed={120} color="rgba(57, 159, 172, 1)" />
             </form>

@@ -3,11 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { BracketView } from "../pages/BracketView";
 
 export const PageTop = () => {
-   
-
     const navigate =  useNavigate();
     return (
-        <div className="flex-col h-[26vh] shadow-lg bg-slate-800 py-16 overflow-hidden
+        <div className="flex-col min-h-[30vh] shadow-lg bg-slate-800 py-16 overflow-hidden
         justify-items-start
         items-center border-b border-b-gray-500">
             <header className="text-center">
