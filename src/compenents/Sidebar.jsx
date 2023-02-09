@@ -39,7 +39,7 @@ export function Sidebar({logged, allEvents}) {
                     
                     return(
                         <Link key={index} to={`event/${value?.eventName}`} className='hover:text-white break-all '>
-                            <img className='rounded-sm h-10 w-10 my-1 hover:border-2 border-blue-500' src="/chesspic.jpg" alt={value?.Name} />
+                            <img className='rounded-sm h-10 w-10 my-1 hover:border-2 border-blue-500' src={`${value?.imageUrl}`}  alt={value?.Name} />
                             {/* <p>{value.Name}</p> */}
                         </Link>
                     )

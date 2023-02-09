@@ -64,7 +64,7 @@ export function Home({allEvents}) {
                 rounded-lg border-gray-300 border
                 hover:border-2
                 hover:border-indigo-300'>
-                  <img className='max-h-32 rounded-lg'  src='chesspic.jpg' />
+                  <img className='h-32 rounded-lg'  src={`${value?.imageUrl}`} />
                   <b className='text-lg self-center' >{value?.eventName}</b>
                   <p className='inline-flex text-md text-gray-600 self-center pb-1 space-x-1'>
                     <span key={index+'k'}>{value?.Sport}</span>
