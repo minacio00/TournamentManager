@@ -3,6 +3,21 @@ import { useNavigate, Link } from "react-router-dom";
 import { BracketView } from "../pages/BracketView";
 
 export const PageTop = () => {
+    const handleClick = async () => {
+        await fetch('https://tournament-manager-api.onrender.com' + '/tournaments/view', {
+            method: "GET", mode: "cors", headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                res.json().then((data) => {
+                    setAlltournaments(data);
+                    console.log("reading db")
+                    localStorage.setItem('allEvents', JSON.stringify(data));
+                });
+                // setAlltournaments(res.json());
+            })
+    }
     const navigate =  useNavigate();
     return (
         <div className="flex-col min-h-[30vh] shadow-lg bg-slate-800 py-16 overflow-hidden
@@ -26,15 +41,15 @@ export const PageTop = () => {
 
                         </div>
                         <div className="ml-3 inline-flex rounded-md shadow">
-                            <a
-                                href="#"
+                            <button
+                                onClick={() => handleclick()}
                                 className="inline-flex items-center
                                 justify-center rounded-md
                                 border border-transparent
                                 bg-blue-500 px-5 py-3 text-base
                                 font-medium text-white hover:bg-blue-400" >
-                                Find events 
-                            </a>
+                                Your events
+                            </button>
                         </div>
                     </div>
                 </div>

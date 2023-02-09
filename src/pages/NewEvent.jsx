@@ -17,6 +17,7 @@ export const NewEvent = () => {
     const [matches, setMatches] = useRecoilState(tournamentList);
     const [sport, setSport] = useRecoilState(sportAtom);
     const [Tournaments,setAlltournaments] = useRecoilState(allTournaments);
+    const [imageUrl, setimageUrl] = useState("");
     const [SpinnerHidden, setSpinnerHidden] = useState(true)
     const navigate =  useNavigate();
     const newTourney = [];
@@ -30,7 +31,7 @@ export const NewEvent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSpinnerHidden(!SpinnerHidden);
-        await fetch('https://tournament-manager.onrender.com'+'/newevent', {
+        await fetch('https://tournament-manager-api.onrender.com'+'/newevent', {
             method: "POST", mode: "cors", headers: {
                 'Content-Type': 'application/json'
             },
@@ -40,7 +41,8 @@ export const NewEvent = () => {
                 'EventDate': EventDate,
                 'Sport': sport,
                 'confirmed': 0,
-                'createdBy': getAuth().currentUser.uid
+                'createdBy': getAuth().currentUser.uid,
+                'imageUrl': imageUrl
             })
         }).then((res) => {
             res.json().then((data) => { newTourney.push(...data); setMatches(newTourney) })
@@ -51,7 +53,8 @@ export const NewEvent = () => {
                         'matches': newTourney,
                         'NumberOfParticipants': parseInt(NumberOfParticipants),
                         'confirmed': 0,
-                        'Sport': sport
+                        'Sport': sport,
+                        'imageUrl': imageUrl
                     }]);
                 })
                 .then(() => { localStorage.setItem('allEvents', JSON.stringify(Tournaments))})
@@ -85,6 +88,12 @@ export const NewEvent = () => {
                         "appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-700 focus:ring-1 focus:border-blue-700 ring-1 focus:z-10 sm:text-sm"
                         placeholder="Event date" name="date" id="eventDate" type="date" required
                         onChange={(e) => setEventDate(e.target.value)} />
+                    <div>
+                        <input className=
+                            "appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-700 focus:ring-1 focus:border-blue-700 focus:z-10 sm:text-sm"
+                            placeholder="image url" name="Event" id="event"
+                            onChange={(e) => setimageUrl(e.target.value)} required />
+                    </div>
                 </div>
                 <button type="submit" hidden={!SpinnerHidden} className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white  hover:bg-blue-400">
                     Create
