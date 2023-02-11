@@ -6,7 +6,7 @@ import { firebaseApp } from "../firebaseConfig";
 
 
 export const EventsList = ({allEvents, shouldFilter}) => {
-    const userUid = getAuth(firebaseApp).currentUser.uid;
+    const userUid = getAuth(firebaseApp).currentUser.uid || false;
     if (shouldFilter) {
         return (
             <main>
