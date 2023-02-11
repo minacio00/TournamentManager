@@ -27,7 +27,7 @@ export const BracketView = () => {
     
     if (tournaments[currentEventIndex].matches.length !== 0) {
         return (
-            <div className=" bg-slate-800 min-h-screen ml-[80px] min-w-fit   text-white
+            <div className=" bg-slate-800 min-h-screen ml-[80px] min-w-full   text-white
             flex flex-col justify-center" >
                 <SingleEliminationBracket
                     matches={tournamentsClone.matches}
