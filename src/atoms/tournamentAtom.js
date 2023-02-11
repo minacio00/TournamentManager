@@ -21,6 +21,14 @@ export const allTournaments = atom({
     key: "allEvents",
     default: []
 });
+export const loggedUserTournaments = atom({
+    key: "currentUserTournaments",
+    default: []
+});
+export const shouldFilterEvents = atom({
+    key: "onlyCurrentUserEvents",
+    default: false
+});
 export const sportAtom = atom({
     key: "sport",
     default: ""
