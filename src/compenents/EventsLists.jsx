@@ -6,13 +6,22 @@ import { firebaseApp } from "../firebaseConfig";
 
 
 export const EventsList = ({allEvents, shouldFilter}) => {
-    const userUid = getAuth(firebaseApp).currentUser.uid || false;
+    function userUid(){
+        if (getAuth(firebaseApp).currentUser) {
+            return getAuth(firebaseApp).currentUser.uid;
+        }
+        else{
+            return false;
+        }
+
+    }
+    
     if (shouldFilter) {
         return (
             <main>
                 <div className='flex py-12 mx-6 justify-self-center flex-wrap'>
                     {allEvents?.map((value, index) => {
-                        if (value.createdBy === userUid) {
+                        if (value.createdBy === userUid()) {
                             return (
                                 <Link to={`/event/${value?.eventName}`}
                                     key={index}
